@@ -36,6 +36,7 @@
           </ul>
       </div>
         </nav>
+        <a href="/order" class="moving_link" style="color: greenyellow; font-style: italic;">Click me to place your order!</a>
           
         </header>
         
@@ -85,25 +86,34 @@
       
       <div class="container2">
         <div id="heading">
-          <h2><i>What our customers are saying!</i></h3>
+          <h3><i>What our customers are saying!</i></h3>
         </div>
         <div class="testimonials">
+          
         
           <div class="testimonial">
-            <img src="" height="100px" width="100px">
+            <img src="/static/images/ind.png">
             <h5>John Doe</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p>Lorem consectetur adipiscing elit. Nullam Etia malesuada</p>
           </div>
           <div class="testimonial">
             <img src="" height="100px" width="100px">
             <h5>Jane Smith</h5>
-            <p>Nullam in ante at lorem rhoncus lacinia.</p>
+            <p>Nullam in ante at lorem rhoncus lacinia Etiam sed ex vitae tortor fringilla malesuada.</p>
           </div>
           <div class="testimonial">
             <img src="" height="100px" width="100px">
             <h5>David Johnson</h5>
             <p>Etiam sed ex vitae tortor fringilla malesuada.</p>
           </div>
+          {% for review in reviews %}
+          <div class="testimonial">
+
+            <img src="{{ review.image }}" alt="{{ review.name }}">
+                <h5>{{ review.name }}</h5>
+                <p>{{ review.message }}</p>
+          </div>
+          {% endfor %}
         </div>
       
         <div class="review">
@@ -132,8 +142,13 @@
       </div>
 
       <footer>
-        <div id="first-line"><div class="privacy">
-          <p><a href="privacy.html">Privacy & Legal</a></p>
+        <div id="first-line">
+          <div class="privacy">
+          <p><a href="privacy.html">Privacy</a></p>
+        </div>
+
+        <div class="terms">
+          <p><a href="terms.html">Terms</a></p>
         </div>
     
         <div class="email">
@@ -160,7 +175,7 @@
             
         </div>
         <div class="copyright">
-            <p>copyright &copy;2023 <a href="#">CHOMZY MEAL TREAT. All Rights Reserved</a></p>
+            <p>copyright &copy;2023 <a href="#">CHOMZY MEAL TREAT: All Rights Reserved</a></p>
         </div>
         <div class="power">
             <p>Powered By PlimsolTech</p>
@@ -179,5 +194,6 @@
   <script src="/static/slide.js"></script>
   <script src="/static/testimonial.js"></script>
   <script src="/static/callout.js"></script>
+  <script src="add_review.js"></script>
 </body>
 </html>

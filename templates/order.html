@@ -19,21 +19,40 @@
     label {
       display: block;
       margin-bottom: 10px;
+      margin-left: 30%;
     }
     
     input[type="text"],
     input[type="submit"] {
-      width: 100%;
+      width: 50%;
       padding: 10px;
       margin-bottom: 20px;
       border: 1px solid yellow;
       background-color: green;
       color: yellow;
+      margin-left: 30%;
+    }
+
+    input[type="submit"]:hover{
+      background-color: yellowgreen;
+      box-shadow: 0px 1px;
+      border-radius: 5px;
     }
     
     input[type="checkbox"] {
       margin-right: 5px;
     }
+
+    /*APPLY MEDIA QUERRIES*/
+@media (max-width: 768px){
+  input[type="text"],
+    input[type="submit"] {
+      width: 90%;
+      margin-left: 0;
+} 
+  label {
+    margin-left: 0;
+}
   </style>
 </head>
 <body>

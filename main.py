@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,jsonify
 
 import psycopg2
+import keyring
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'mealtreat'
@@ -10,12 +11,13 @@ app.config['SECRET_KEY'] = 'mealtreat'
 db_host = "127.0.0.1"
 db_name = "meal-treat"
 db_user = "postgres"
-db_password = ""
+db_password = keyring.get_password('meal-treat', 'postgres')
 
 #Define the route for the homepage
 @app.route('/')
 def home():
     return render_template('index.html')
+    
 
 # Define the route for the contact form
 @app.route('/contact', methods=['GET', 'POST'])
@@ -152,7 +154,7 @@ def leave_a_review():
         # Connect to the database
         conn = psycopg2.connect(host=db_host, dbname=db_name, user=db_user, password=db_password)
         cur = conn.cursor()
-
+  
         # Insert form data into the database
         cur.execute("INSERT INTO customer_review (name, review, image_data) VALUES (%s, %s, %s)",
                     (name, review, psycopg2.Binary(image_bytes)))
@@ -166,6 +168,22 @@ def leave_a_review():
         return 'Review submitted successfully!'
     
     return render_template('submit_review.html')
+
+@app.route('/add_reviews')
+def new_review():
+
+    try:
+        conn = psycopg2.connect(host=db_host, dbname=db_name, user=db_user, password=db_password)
+        cur = conn.cursor()
+
+        cursor.execute('SELECT name, review, image_data FROM customer_review')
+        customer_review = [{'name': name, 'review': review, 'image': image_data} for name, review, image_data in cursor.fetchall()]
+        
+        cursor.close()
+        conn.close()
+
+    except Exception as e:
+        return str(e)
 
 
     
